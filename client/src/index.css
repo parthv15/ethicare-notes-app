@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+p{
+    color: #313233;
+    font-family: Jomolhari;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+input{
+    color: #EAE6E6;
+    margin-left: 5vw;
+    font-family: Jomolhari;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: #313233;
+    padding-left: 10px;
+}
+
+button{
+    background: #5461D6;
+    color: #EAE6E6;
+    text-align: center;
+    font-family: Jomolhari;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 201px;
+    height: 38px;
+    flex-shrink: 0;
+    border-color: #5461D6;
+}
+
+.AuthPageMainDiv{
+    background-color: #232337;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+.LoginTitle{
+    color: #D9D9D9;
+    text-align: left;
+    padding-top: 2vh;
+    padding-left: 3vw;
+    height: 10vh;
+    font-family: Abhaya Libre Medium;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.LoginContents{
+    display: flex;
+}
+
+.LoginBox{
+    margin-top: 10vh;
+    margin-left: 15vw;
+    background-color: #D9D9D9;
+    width: 30vw;
+    max-width: 500px;
+    min-width: 300px;
+    height: 70vh;
+    max-height: 700px;
+    min-height: 500px;
+    border-radius: 5vh;
+    display: block;
+}
+
+.ImgLogin{
+    margin-top: 10vh;
+    margin-left: 10vw;
+    background-color: #D9D9D9;
+    width: 30vw;
+    max-width: 500px;
+    min-width: 300px;
+    height: 70vh;
+    max-height: 700px;
+    min-height: 500px;
+    border-radius: 5vh;
+}
+
+.textAuthPage{
+    margin-top: 12vh;
+    margin-left: 5vw;
+}
+
+.textAuthPagePass{
+    margin-top: 7vh;
+    margin-left: 5vw;
+}
+
+.inputAuthPage{
+    margin-top: 1vh;
+    margin-left: 5vw;
+    width: 20vw;
+}
+
+.buttonAuthPage1{
+    margin-top: 7vh;
+    margin-left: 5vw;
+    width:20vw
+}
+
+.buttonAuthPage2{
+    margin-top: 2vh;
+    margin-left: 5vw;
+    width:20vw
+}
