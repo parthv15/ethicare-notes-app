@@ -1,5 +1,9 @@
+import AuthPage from "./AuthPage.tsx"
+import "./index.css";
 function App() {
-  return <div>Hello World!</div>;
+  return <div className="App">
+    <AuthPage />
+    </div>;
 }
 
 export default App;
