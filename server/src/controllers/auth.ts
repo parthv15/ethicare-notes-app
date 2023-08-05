@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
 
-export const func: RequestHandler = () => {
-  console.log("something");
+export const login: RequestHandler = (req, res) => {
+  res.status(200).json(req.body);
 };
