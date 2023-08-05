@@ -1,9 +1,7 @@
-import AuthPage from "./AuthPage.tsx"
+import AuthPage from "./components/AuthPage.tsx";
 import "./index.css";
 function App() {
-  return <div className="App">
-    <AuthPage />
-    </div>;
+  return <AuthPage />;
 }
 
 export default App;
