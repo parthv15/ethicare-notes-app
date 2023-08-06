@@ -1,16 +1,21 @@
 import { useForm } from "react-hook-form";
 import { SignUpCredentials } from "../network/authApi";
 import * as AuthApi from "../network/authApi";
+import { User } from "../network/model/User";
 
-const SignUpModel = () => {
+interface signUpProps {
+  onSignUpSuccessful: (user: User) => void;
+}
+
+const SignUpModel = ({ onSignUpSuccessful }: signUpProps) => {
   const { register, handleSubmit } = useForm<SignUpCredentials>();
 
   async function onSubmit(credentials: SignUpCredentials) {
     try {
       const user = await AuthApi.signUp(credentials);
-      console.log(user);
+      onSignUpSuccessful(user);
     } catch (error) {
-      console.log(error);
+      console.log(error); // set error here
     }
   }
 
