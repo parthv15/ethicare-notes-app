@@ -1,12 +1,23 @@
 import { useForm } from "react-hook-form";
+import { LoginCredentials } from "../network/authApi";
+import * as AuthApi from "../network/authApi";
+import { User } from "../network/model/User";
 
-const LoginModel = () => {
-  const { register, handleSubmit } = useForm();
+interface loginModelProps {
+  onLoginSuccessful: (user: User) => void;
+}
 
-  function submit(data) {
-    console.log(data);
+const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
+  const { register, handleSubmit } = useForm<LoginCredentials>();
+
+  async function onSubmit(credentials: LoginCredentials) {
+    try {
+      const user = await AuthApi.login(credentials);
+      onLoginSuccessful(user);
+    } catch (error) {
+      console.log(error); // set error here
+    }
   }
-
   return (
     <div className="w-full flex flex-col max-w-[500px] text-center">
       <div className="w-full flex flex-col mb-10">
@@ -16,7 +27,7 @@ const LoginModel = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full flex flex-col">
           <input
             className="w-full text-black border-b border-black outline-none focus:outline-none py-2 my-2 bg-transparent"

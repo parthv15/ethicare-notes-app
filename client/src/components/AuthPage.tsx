@@ -2,8 +2,13 @@ import { useState } from "react";
 import LoginModel from "./LoginModel";
 import SignUpModel from "./SignUpModel";
 import LeftImgDiv from "./ImageDiv";
+import { User } from "../network/model/User";
 
-const AuthPage = () => {
+interface AuthPageProps {
+  setLoggedInUser: (user: User) => void;
+}
+
+const AuthPage = ({ setLoggedInUser }: AuthPageProps) => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   function showSignUp() {
@@ -43,7 +48,19 @@ const AuthPage = () => {
           {/* Ethicare Financial Planner */}
         </h1>
 
-        {isSignUp ? <SignUpModel /> : <LoginModel />}
+        {isSignUp ? (
+          <SignUpModel
+            onSignUpSuccessful={(user) => {
+              setLoggedInUser(user);
+            }}
+          />
+        ) : (
+          <LoginModel
+            onLoginSuccessful={(user) => {
+              setLoggedInUser(user);
+            }}
+          />
+        )}
 
         <div className="w-full items-center flex justify-center">
           {isSignUp ? loginPrompt : signUpPrompt}
