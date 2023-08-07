@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { LoginCredentials } from "../network/authApi";
 import * as AuthApi from "../network/authApi";
 import { User } from "../network/model/User";
+import Modal from 'react-bootstrap/Modal';
 
 interface loginModelProps {
   onLoginSuccessful: (user: User) => void;
@@ -10,11 +12,20 @@ interface loginModelProps {
 const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
   const { register, handleSubmit } = useForm<LoginCredentials>();
 
+  const [error, setError] = useState(false);
+  const handleClose = () => setError(false);
+  const s = `sds`;
+
+  const [errorColour, setErrorColour] = useState(false);
+
+
   async function onSubmit(credentials: LoginCredentials) {
     try {
       const user = await AuthApi.login(credentials);
       onLoginSuccessful(user);
     } catch (error) {
+      setError(true);
+      setErrorColour(true);
       console.log(error); // set error here
     }
   }
@@ -30,13 +41,14 @@ const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full flex flex-col">
           <input
-            className="w-full text-black border-b border-black outline-none focus:outline-none py-2 my-2 bg-transparent"
+            
+            className={`w-full text-black border-b ${errorColour ? 'border-red-600':'border-black'} outline-none focus:outline-none py-2 my-2 bg-transparent ${errorColour ? 'placeholder-red-400':''}`}
             type="email"
             placeholder="Email"
             {...register("email")}
           />
           <input
-            className="w-full text-black border-b border-black outline-none focus:outline-none py-2 my-2 bg-transparent"
+            className={`w-full text-black border-b ${errorColour ? 'border-red-600':'border-black'} outline-none focus:outline-none py-2 my-2 bg-transparent ${errorColour ? 'placeholder-red-400':''}`}
             type="password"
             placeholder="Password"
             {...register("password")}
@@ -63,6 +75,13 @@ const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
           </button>
         </div>
       </form>
+      <Modal show={error} onHide={handleClose}>
+        <Modal.Header>
+        <Modal.Title>Log In Failed</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Invalid credentials, please try again.
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
