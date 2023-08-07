@@ -51,6 +51,7 @@ const AuthPage = ({ setLoggedInUser }: AuthPageProps) => {
         {isSignUp ? (
           <SignUpModel
             onSignUpSuccessful={(user) => {
+              
               setLoggedInUser(user);
             }}
           />
