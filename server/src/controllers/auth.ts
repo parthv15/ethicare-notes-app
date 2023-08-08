@@ -38,3 +38,47 @@ export const login: RequestHandler<
     next(error);
   }
 };
+
+interface SignUpBody {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+export const signUp: RequestHandler<
+  unknown,
+  unknown,
+  SignUpBody,
+  unknown
+> = async (req, res, next) => {
+  const { name, email, password, confirmPassword } = req.body;
+
+  try {
+    if (!name || !email || !password || !confirmPassword) {
+      throw createHttpError(400, "Parameters Missing");
+    }
+
+    if (password !== confirmPassword) {
+      throw createHttpError(401, "Password do not match");
+    }
+
+    const existingEmail = await UserModel.findOne({ email }).exec();
+
+    if (!existingEmail) {
+      throw createHttpError(409, "an account with this email already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await UserModel.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
+  }
+};
