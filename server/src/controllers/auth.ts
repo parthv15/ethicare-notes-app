@@ -8,6 +8,11 @@ interface loginBody {
   password?: string;
 }
 
+interface userSuccessfulResponse {
+  email: string;
+  name: string;
+}
+
 export const login: RequestHandler<
   unknown,
   unknown,
@@ -33,7 +38,12 @@ export const login: RequestHandler<
       throw createHttpError(401, "Invalid Credentials");
     }
 
-    res.status(201).json(user);
+    const successfulLoginResponse: userSuccessfulResponse = {
+      email,
+      name: user.name,
+    };
+
+    res.status(201).json(successfulLoginResponse);
   } catch (error) {
     next(error);
   }
@@ -65,19 +75,21 @@ export const signUp: RequestHandler<
 
     const existingEmail = await UserModel.findOne({ email }).exec();
 
-    if (!existingEmail) {
+    if (existingEmail) {
       throw createHttpError(409, "an account with this email already exists");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await UserModel.create({
+    await UserModel.create({
       name,
       email,
       password: hashedPassword,
     });
 
-    res.status(201).json(newUser);
+    const signUpSuccessfulResponse: userSuccessfulResponse = { name, email };
+
+    res.status(201).json(signUpSuccessfulResponse);
   } catch (error) {
     next(error);
   }
