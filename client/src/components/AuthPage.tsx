@@ -43,10 +43,7 @@ const AuthPage = ({ setLoggedInUser }: AuthPageProps) => {
     <div className="w-full h-screen flex items-start">
       <LeftImgDiv />
       <div className="w-1/2 h-full bg-[#F5F5F5] flex flex-col p-20 justify-between items-center">
-        <h1 className="text-[#060606] font-semibold text-2xl">
-          {" "}
-          {/* Ethicare Financial Planner */}
-        </h1>
+        <h1 className="text-[#060606] font-semibold text-2xl"> </h1>
 
         {isSignUp ? (
           <SignUpModel
@@ -62,7 +59,12 @@ const AuthPage = ({ setLoggedInUser }: AuthPageProps) => {
           />
         )}
 
-        <div className="w-full items-center flex justify-center">
+        <div className="w-full items-center justify-center flex flex-col">
+          {!isSignUp && (
+            <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2 mb-2">
+              Forgot Password
+            </p>
+          )}
           {isSignUp ? loginPrompt : signUpPrompt}
         </div>
       </div>

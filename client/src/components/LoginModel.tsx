@@ -43,17 +43,6 @@ const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
           />
         </div>
 
-        <div className="w-full flex items-center justify-between mt-7 mb-4">
-          <div className="w-full flex items-center">
-            <input type="checkbox" className="w-4 h-4 mr-2" />
-            <p className="text-sm">Remember me for 30 days</p>
-          </div>
-
-          <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-            Forgot Password
-          </p>
-        </div>
-
         <div className="w-full flex flex-col my-4">
           <button
             type="submit"
