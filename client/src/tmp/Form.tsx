@@ -110,7 +110,7 @@ const Form = () => {
 
   async function onSubmit(data: ObjectiveAndRequirement): Promise<void> {
     console.log(JSON.stringify(data));
-    const response = await fetch("/api/get", {
+    const response = await fetch("/api/form/requirement", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
