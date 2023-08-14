@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 import authRouter from "./routes/user";
+import formRouter from "./routes/form";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/api/users", authRouter);
+app.use("/api/form", formRouter);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "Page not found :("));
