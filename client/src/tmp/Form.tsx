@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { ObjectiveAndRequirement } from "./requirement";
+import { Objective } from "./objective";
 
 const Form = () => {
-  const { register, handleSubmit } = useForm<ObjectiveAndRequirement>();
+  const { register, handleSubmit } = useForm<Objective>();
 
   const [showOption, setShowOption] = useState(false);
   const [showChangeOption, setShowChangeOption] = useState("");
@@ -30,24 +30,41 @@ const Form = () => {
       <h4 className="pb-2">Term changes</h4>
       <input
         type="checkbox"
-        {...register("bothTermChanges.employmentConditions")}
+        {...register("shortAndLongTermChange")}
+        value="employment"
       />
       <label className="pl-2">Employment conditions</label>
       <br />
 
-      <input type="checkbox" {...register("bothTermChanges.leaveType")} />
+      <input
+        type="checkbox"
+        {...register("shortAndLongTermChange")}
+        value="parentalLeave"
+      />
       <label className="pl-2">Parental leave / maternity leave</label>
       <br />
 
-      <input type="checkbox" {...register("bothTermChanges.extendedHoliday")} />
+      <input
+        type="checkbox"
+        {...register("shortAndLongTermChange")}
+        value="extended"
+      />
       <label className="pl-2">Extended Holidays</label>
       <br />
 
-      <input type="checkbox" {...register("bothTermChanges.majorExpense")} />
+      <input
+        type="checkbox"
+        {...register("shortAndLongTermChange")}
+        value="major"
+      />
       <label className="pl-2">Major</label>
       <br />
 
-      <input type="checkbox" {...register("bothTermChanges.retirementBoth")} />
+      <input
+        type="checkbox"
+        {...register("shortAndLongTermChange")}
+        value="retirement"
+      />
       <label className="pl-2">
         Retirement (only for both long and short term)
       </label>
@@ -65,7 +82,8 @@ const Form = () => {
         <h4 className="pb-2">Long - term changes</h4>
         <input
           type="checkbox"
-          {...register("longTermChanges.retirementLong")}
+          {...register("longTermChange")}
+          value="retirement"
         />
         <label className="pl-2">Retirement</label>
         <br />
@@ -79,7 +97,7 @@ const Form = () => {
         <h4 className="pb-2">Exit Strategy discussed: </h4>
         <input
           type="checkbox"
-          {...register("longTermChanges.exitStrategy.superannuation")}
+          {...register("exitStrategy")}
           value="Lumpsum payment from super .... "
         />
         <label className="pl-2">Lumpsum payment from super .... </label>
@@ -87,7 +105,7 @@ const Form = () => {
 
         <input
           type="checkbox"
-          {...register("longTermChanges.exitStrategy.investmentProperty")}
+          {...register("exitStrategy")}
           value="Sale of investment property .... "
         />
         <label className="pl-2">Sale of investment property .... </label>
@@ -95,7 +113,7 @@ const Form = () => {
 
         <input
           type="checkbox"
-          {...register("longTermChanges.exitStrategy.downsizing")}
+          {...register("exitStrategy")}
           value="Downsizing. Sale of owner-occupied .... "
         />
         <label className="pl-2">Downsizing. sale of owner-occupied .... </label>
@@ -108,17 +126,17 @@ const Form = () => {
     </div>
   );
 
-  async function onSubmit(data: ObjectiveAndRequirement): Promise<void> {
-    console.log(JSON.stringify(data));
-    const response = await fetch("/api/form/requirement", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+  async function onSubmit(data: Objective): Promise<void> {
+    console.log(data);
+    // const response = await fetch("/api/form/requirement", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // });
 
-    console.log(response.json());
+    // console.log(response.json());
   }
 
   return (
@@ -179,7 +197,7 @@ const Form = () => {
         </div>
         <div className="pt-2 pb-2">
           <h4 className="pb-2">Purpose</h4>
-          <select {...register("applicationPurpose")} className="border">
+          <select {...register("purpose")} className="border">
             <option value="" disabled selected hidden>
               Select Option
             </option>
@@ -213,7 +231,7 @@ const Form = () => {
         </div>
         <div className="pt-2 pb-2">
           <h4 className="pb-2">Loan term selection</h4>
-          <select {...register("loanTerm")} className="border">
+          <select {...register("loanTermSelection")} className="border">
             <option value="" disabled selected hidden>
               Select Option
             </option>
@@ -238,13 +256,13 @@ const Form = () => {
           <h4 className="pb-2">Existing account holder of lender</h4>
           <input
             type="radio"
-            {...register("isExistingHolderOfLender")}
+            {...register("isExistingAccountOfLender")}
             value="yes"
           />{" "}
           Yes <br></br>
           <input
             type="radio"
-            {...register("isExistingHolderOfLender")}
+            {...register("isExistingAccountOfLender")}
             value="no"
           />{" "}
           No {/** TEST HERE */}
@@ -254,64 +272,76 @@ const Form = () => {
           <h4 className="pb-2">Lender Selection based on: </h4>
           <input
             type="checkbox"
-            {...register("lenderSelection.existingHolder")}
+            {...register("lenderSelection")}
+            value="existing"
           />
           <label className="pl-2">Existing account holder</label>
           <br />
 
-          <input type="checkbox" {...register("lenderSelection.rateOffer")} />
+          <input
+            type="checkbox"
+            {...register("lenderSelection")}
+            value="promotional"
+          />
           <label className="pl-2">Promotional interest rate offer</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.discountedRate")}
+            {...register("lenderSelection")}
+            value="discounted"
           />
           <label className="pl-2">Discounted rate under package</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.upfrontBenefit")}
+            {...register("lenderSelection")}
+            value="upfront"
           />
           <label className="pl-2">Upfront benefit by cash back offer</label>
           <br />
 
-          <input type="checkbox" {...register("lenderSelection.higherLVR")} />
+          <input type="checkbox" {...register("lenderSelection")} value="lvr" />
           <label className="pl-2">Higher LVR requirement</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.crossCollateral")}
+            {...register("lenderSelection")}
+            value="crossCollateralization"
           />
           <label className="pl-2">Cross-collateralization</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.creditPolicy.selfEmployment")}
+            {...register("lenderSelection")}
+            value="selfEmployment"
           />
           <label className="pl-2">Credit policy - self employment</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.creditPolicy.shortTermEmployment")}
+            {...register("lenderSelection")}
+            value="shortTerm"
           />
           <label className="pl-2">Credit policy - short-term employment</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.creditPolicy.casualEmployment")}
+            {...register("lenderSelection")}
+            value="casualEmployment"
           />
           <label className="pl-2">Credit policy - casual employment</label>
           <br />
 
           <input
             type="checkbox"
-            {...register("lenderSelection.creditPolicy.specificLending")}
+            {...register("lenderSelection")}
+            value="specific"
           />
           <label className="pl-2">
             Credit policy - specific lending criteria
@@ -320,12 +350,17 @@ const Form = () => {
 
           <input
             type="checkbox"
-            {...register("lenderSelection.creditPolicy.cashOutReq")}
+            {...register("lenderSelection")}
+            value="cashOut"
           />
           <label className="pl-2">Credit policy - cash out requirement</label>
           <br />
 
-          <input type="checkbox" {...register("lenderSelection.other")} />
+          <input
+            type="checkbox"
+            {...register("lenderSelection")}
+            value="Other"
+          />
           <input className="border ml-2" type="text" placeholder="Other" />
           <br />
         </div>
@@ -350,7 +385,7 @@ const Form = () => {
           <div className="pt-2 pb-2">
             <h4 className="pb-2">Referral</h4>
             <select
-              {...register("changeReferralType")}
+              {...register("expectOfChange")}
               className="border"
               onChange={handleChange}
             >
