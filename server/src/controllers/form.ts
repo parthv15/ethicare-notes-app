@@ -1,10 +1,10 @@
 import { RequestHandler } from "express";
-import { ObjectiveAndRequirement } from "../models/requirement";
+import { FormStructure } from "../requestModels";
 
 export const requirement: RequestHandler<
   unknown,
   unknown,
-  ObjectiveAndRequirement,
+  FormStructure,
   unknown
 > = async (req, res) => {
   console.log(req.body);

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { ObjectiveAndRequirement } from "./requirement";
+// import { ObjectiveAndRequirement } from "./requirement";
 
 const Form = () => {
   const { register, handleSubmit } = useForm<ObjectiveAndRequirement>();
