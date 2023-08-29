@@ -18,6 +18,7 @@ const LoginModel = ({ onLoginSuccessful }: loginModelProps) => {
   const [errorColour, setErrorColour] = useState(false);
 
   async function onSubmit(credentials: LoginCredentials) {
+    
     try {
       const user = await AuthApi.login(credentials);
       onLoginSuccessful(user);
