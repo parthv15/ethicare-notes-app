@@ -11,8 +11,8 @@ export type Requirement = {
   isExistingAccountOfLender: string;
   lenderSelection: string[];
   expectOfChange: string;
-  typeOfChange: string | undefined;
-  shortAndLongTermChange: string[] | undefined;
-  longTermChange: string | undefined;
-  exitStrategy: string[] | undefined;
+  typeOfChange: string;
+  shortAndLongTermChange: string[];
+  longTermChange: string;
+  exitStrategy: string[];
 };
