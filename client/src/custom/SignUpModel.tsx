@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SignUpCredentials } from "../network/authApi";
 import * as AuthApi from "../network/authApi";
 import { User } from "../network/model/User";
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 
 interface signUpProps {
   onSignUpSuccessful: (user: User) => void;
@@ -59,22 +59,26 @@ const SignUpModel = ({ onSignUpSuccessful }: signUpProps) => {
             {...register("confirmPassword")}
           />
         </div>
-        {error && <p className="text-sm text-left text-red-400 mt-2">&#9737; Invalid Credentials</p>}
+        {error && (
+          <p className="text-sm text-left text-red-400 mt-2">
+            &#9737; Invalid Credentials
+          </p>
+        )}
         <div className="w-full flex flex-col my-4">
           <button
-          type = "submit"
-          className="w-full text-white my-2 font-semibold bg-[#060606] rounded-md p-4 text-center flex items-center justify-center cursor-pointer">
+            type="submit"
+            className="w-full text-white my-2 font-semibold bg-[#060606] rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
+          >
             Sign Up
           </button>
         </div>
       </form>
-      {/* <Modal show={error} onHide={handleClose}>
+      <Modal show={error} onHide={handleClose}>
         <Modal.Header>
-        <Modal.Title>Sign Up Failed</Modal.Title>
+          <Modal.Title>Sign Up Failed</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Invalid credentials, please try again.
-        </Modal.Body>
-      </Modal> */}
+        <Modal.Body>Invalid credentials, please try again.</Modal.Body>
+      </Modal>
     </div>
   );
 };
