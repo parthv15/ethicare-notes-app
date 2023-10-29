@@ -1,4 +1,4 @@
-import AuthPage from "./components/AuthPage.tsx";
+import AuthPage from "./custom/AuthPage.tsx";
 import "./index.css";
 
 function App() {
